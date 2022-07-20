@@ -1,5 +1,5 @@
 {
 	"user_main": [
-		{"username": "fishingbooker", "password": "QAFBTest", "firstname": "Fishing", "lastname": "Booker", "email": "stefan@fishingbooker.com", "phone": "601234123", "card_number": "6221261111117766","expiry": "20/26", "cvv": "200", "card_name": "fishingbooker", "zip": "21000"}
+		{"username": "fishingbooker", "password": "QAFBTest", "firstname": "Fishing", "lastname": "Booker", "email": "stefan@fishingbooker.com", "phone": "601234123", "card_number": "6221261111117766","expiry": "226", "cvv": "200", "card_name": "fishingbooker", "zip": "21000"}
 	  ]
 }

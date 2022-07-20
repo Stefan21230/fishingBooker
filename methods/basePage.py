@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
 
 
 class BasePage:
@@ -27,8 +28,12 @@ class BasePage:
         """
         return self.wait_for_element_to_be_visible(locator, time_out).text
 
-    def find_element(self, locator):
-        return self.driver.find_element(locator)
+    def input_in_iframe_element(self, iframe_locator, locator, text):
+        iframe = self.driver.find_element(By.XPATH, iframe_locator)
+        self.driver.switch_to.frame(iframe)
+        # element = self.wait_for_element_to_be_visible(locator)
+        self.input(text, locator)
+        self.driver.switch_to.default_content()
 
     def scroll_to_element(self, locator):
         element = self.wait_for_element_to_be_visible(locator)
