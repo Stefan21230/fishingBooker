@@ -11,29 +11,28 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
-    def click(self, locator, time_out=10):
-        self.wait_for_element_to_be_clickable(locator, time_out).click()
-
     def action_click(self, locator):
         element = self.wait_for_element_to_be_presence(locator)
         self.driver.implicitly_wait(5)
         ActionChains(self.driver).move_to_element(element).click(element).perform()
 
+    def click(self, locator, time_out=10):
+        self.wait_for_element_to_be_clickable(locator, time_out).click()
+
     def input(self, text: str, locator, time_out=10):
         self.wait_for_element_to_be_presence(locator, time_out).send_keys(text)
+
+    def input_in_iframe_element(self, iframe_locator, locator, text):
+        iframe = self.driver.find_element(By.XPATH, iframe_locator)
+        self.driver.switch_to.frame(iframe)
+        self.input(text, locator)
+        self.driver.switch_to.default_content()
 
     def get_visible_element_text(self, locator, time_out=10):
         """
         Method get WebElement text.
         """
         return self.wait_for_element_to_be_visible(locator, time_out).text
-
-    def input_in_iframe_element(self, iframe_locator, locator, text):
-        iframe = self.driver.find_element(By.XPATH, iframe_locator)
-        self.driver.switch_to.frame(iframe)
-        # element = self.wait_for_element_to_be_visible(locator)
-        self.input(text, locator)
-        self.driver.switch_to.default_content()
 
     def scroll_to_element(self, locator):
         element = self.wait_for_element_to_be_visible(locator)

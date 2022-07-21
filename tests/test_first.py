@@ -2,6 +2,7 @@ from tests.base_test import BaseTest
 from methods.tripsPage import *
 from methods.populateTripDataPage import *
 from methods.payingPage import *
+from methods.finalizeBookingPage import *
 import time
 
 
@@ -10,6 +11,7 @@ class FirstTest(BaseTest):
         self.trips_page = TripsPage(self.driver)
         self.populate_trip_data = PopulateTripDataPage(self.driver)
         self.paying_page = PayingPage(self.driver)
+        self.finalize_booking_page = FinalizeBookingPage(self.driver)
 
         self.trips_page.booking_trip()
 
@@ -20,3 +22,5 @@ class FirstTest(BaseTest):
 
         self.paying_page.populate_paying_data_and_book(user_config("card_number"), user_config("expiry"),
                                                        user_config("cvv"), user_config("card_name"), user_config("zip"))
+
+        self.finalize_booking_page.save_booking_number()

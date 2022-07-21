@@ -6,3 +6,4 @@ project_root_path = Path("C:\\fishingBooker-Automation")
 
 # resources path
 resources_path = Path(project_root_path, "resources")
+booking_number_path = Path(resources_path, "booking_number")
