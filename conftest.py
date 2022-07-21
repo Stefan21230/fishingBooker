@@ -13,8 +13,6 @@ def setup(request, user_config, initialize_driver):
     driver = initialize_driver
     driver.maximize_window()
     url = "https://" + user_config("username") + ":" + user_config("password") + "@" + str(Path(url_path))
-    # url = "https://" + user_config("username") + ":" + user_config("password") + "@" + "qahiring.dev.fishingbooker.com/charters/book/2/19612?booking_date_availability_form_search=July+20%2C+2022&booking_date=07-20-2022&booking_days=1&booking_persons=2&booking_children=0&booking_package=97149#/"
-    # url = "https://fishingbooker:QAFBTest@qahiring.dev.fishingbooker.com/charters/book/2/19612?booking_date_availability_form_search=July+20%2C+2022&booking_date=07-20-2022&booking_days=1&booking_persons=2&booking_children=0&booking_package=97149#/step2"
     driver.get(url)
     request.cls.driver = driver
     yield
@@ -29,6 +27,15 @@ def initialize_driver(browser):
 
     opt_chrome = webdriver.ChromeOptions()
     opt_chrome.add_argument("--start-maximized")
+    opt_chrome.add_argument('--no-sandbox')
+    opt_chrome.add_argument("--disable-web-security")
+    opt_chrome.add_argument('--disable-dev-shm-usage')
+    opt_chrome.add_argument("--disable-popup-blocking")
+    opt_chrome.add_argument("disable-infobars")
+    opt_chrome.add_argument("--disable-extensions")
+    opt_chrome.add_argument("--allow-running-insecure-content")
+    opt_chrome.add_argument("--ignore-certificate-errors")
+    opt_chrome.add_argument("--ignore-ssl-errors")
     # opt_chrome.add_argument("--headless")
 
     # Firefox options

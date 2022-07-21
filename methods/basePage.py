@@ -13,11 +13,13 @@ class BasePage:
 
     def action_click(self, locator):
         element = self.wait_for_element_to_be_presence(locator)
-        self.driver.implicitly_wait(5)
         ActionChains(self.driver).move_to_element(element).click(element).perform()
 
     def click(self, locator, time_out=10):
         self.wait_for_element_to_be_clickable(locator, time_out).click()
+
+    def click_javascript(self, locator):
+        self.driver.execute_script("arguments[0].click", locator)
 
     def input(self, text: str, locator, time_out=10):
         self.wait_for_element_to_be_presence(locator, time_out).send_keys(text)
@@ -103,4 +105,15 @@ class BasePage:
             return WebDriverWait(self.driver, time_out).until(EC.presence_of_all_elements_located(locator))
         except Exception:
             raise Exception("Couldn't find element that has locator: {} , for time period of: {} seconds.".format(locator[1], time_out))
+
+    def wait_for_elements_to_be_presence_null(self, locator, time_out=1):
+        """
+        Method check if WebElements are present on the DOM
+        of a page. This does not necessarily mean that the elements is visible.
+        locator - used to find the elements returns the WebElement once it is located
+        """
+        try:
+            return WebDriverWait(self.driver, time_out).until(EC.presence_of_all_elements_located(locator))
+        except Exception:
+            return []
 
