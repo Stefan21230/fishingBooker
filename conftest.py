@@ -1,11 +1,10 @@
 import pytest
-import pathlib
 import json
-import configparser
 from pytest import fixture
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from resources.pathData import *
+from pathlib import Path
+from resources.pathData import url_path, driver_path, resources_path
 
 
 @fixture(scope="function")
@@ -16,15 +15,14 @@ def setup(request, user_config, initialize_driver):
     driver.get(url)
     request.cls.driver = driver
     yield
-    # driver.close()
-    # driver.quit()
+    driver.close()
+    driver.quit()
 
 
 @fixture(scope="function")
 def initialize_driver(browser):
 
     # Chrome options
-
     opt_chrome = webdriver.ChromeOptions()
     opt_chrome.add_argument("--start-maximized")
     opt_chrome.add_argument('--no-sandbox')
@@ -39,7 +37,6 @@ def initialize_driver(browser):
     # opt_chrome.add_argument("--headless")
 
     # Firefox options
-
     opt_firefox = webdriver.FirefoxOptions()
     opt_firefox.add_argument("--start-maximized")
 

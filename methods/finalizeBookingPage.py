@@ -1,7 +1,8 @@
 import os
+from pathlib import Path
 from methods.basePage import BasePage
-from pages.names_finalize_booking import *
-from resources.pathData import *
+from pages.names_finalize_booking import booking_number, create_pass_close_btn
+from resources.pathData import booking_number_path
 
 
 class FinalizeBookingPage(BasePage):
